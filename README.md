@@ -29,15 +29,14 @@ Example of output STIX file</p>
 This tool requires:
 <ul>
   <li>python >= 3.5</li>
-  <li>joblib</li>
-  <li>flask</li>
-  <li>pandas</li>
-  <li>pickle</li>
-  <li>numpy</li>
-  <li>stix2</li>
-  <li>sklearn</li>
-  <li>nltk, and the following packages:<ul><li>punkt</li><li>stopwords</li><li>wordnet</li></ul></li>
-  <li>colorama</li>
+  <li><a href="https://joblib.readthedocs.io/en/latest/">joblib</a></li>
+  <li><a href="https://pandas.pydata.org/">pandas</a></li>
+  <li><a href="https://numpy.org/">numpy</a></li>
+  <li><a href="https://stix2.readthedocs.io/en/latest/">stix2</a></li>
+  <li><a href="https://scikit-learn.org/stable/">scikit-learn</a></li>
+  <li><a href="https://www.nltk.org/">nltk</a>, and the following packages:<ul><li>punkt</li><li>stopwords</li><li>wordnet</li></ul></li>
+  <li><a href="https://palletsprojects.com/p/flask/">flask</a> (only for the GUI version)</li>
+  <li><a href="https://pypi.org/project/colorama/">colorama</a> (only for the command-line version)</li>
 </ul>
 Then simply download the tool and run that app file with python.
 
