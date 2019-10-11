@@ -28,7 +28,7 @@ Example of output STIX file</p>
 ## Installation
 This tool requires:
 <ul>
-  <li>python >= 3.5</li>
+  <li><a href="https://www.python.org/">python</a> >= 3.5</li>
   <li><a href="https://joblib.readthedocs.io/en/latest/">joblib</a></li>
   <li><a href="https://pandas.pydata.org/">pandas</a></li>
   <li><a href="https://numpy.org/">numpy</a></li>
