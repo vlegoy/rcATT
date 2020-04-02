@@ -81,4 +81,4 @@ Click the "Export the results" button and fill in the form (if not filled in, de
 
 ## More details
 
-This tool is the result of a Mater thesis on the prediction of tactics and techniques in cyber threat reports. You can find more details on this work in the following paper: [link to the paper]
+This tool is the result of a Mater thesis on the prediction of tactics and techniques in cyber threat reports. You can find more details on this work in the following paper: <a href="https://github.com/vlegoy/rcATT/blob/master/MScThesis_rcATT_VLegoy.pdf">"Retrieving ATT&CK tactics and techniques in cyber threat repots"</a>.
