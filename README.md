@@ -3,7 +3,7 @@
 
 <p align="center">Reports Classification by Adversarial Tactics and Techniques</p>
 
-<p align="center"><img src="https://img.shields.io/badge/made%20with-python-blue.svg" alt="made with python">   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license MIT">    <!--<img src="https://img.shields.io/github/release-date/ValLGY/rcATT" alt="release date">--></p>
+<p align="center"><img src="https://img.shields.io/badge/made%20with-python-blue.svg" alt="made with python">   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license MIT">
 
 A python tool to predict Att&ck tactics and techniques from cyber threat reports.
 
@@ -80,5 +80,4 @@ Click the "Export the results" button and fill in the form (if not filled in, de
 <p align="center"><img src="img/rcATTgui2.jpg" alt="rcATT save in stix" height="350"></p>
 
 ## More details
-
-This tool is the result of a Mater thesis on the prediction of tactics and techniques in cyber threat reports. You can find more details on this work in the following paper: <a href="https://github.com/vlegoy/rcATT/blob/master/MScThesis_rcATT_VLegoy.pdf">"Retrieving ATT&CK tactics and techniques in cyber threat repots"</a>.
+Created by Valentine Legoy, during her Master thesis at the University of Twente, in partnership with Siemens. You can find more details on this work in the following paper: <a href="https://github.com/vlegoy/rcATT/blob/master/MScThesis_rcATT_VLegoy.pdf">"Retrieving ATT&CK tactics and techniques in cyber threat repots"</a>.
