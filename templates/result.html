@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>rcATT - reports classification by adversarial tactics and techniques</title>
+	<style type="text/css">
+
+		/* Layout */
+		body {
+			min-width: 630px;
+		}
+
+		#container {
+			padding-left: 100px;
+			padding-right: 100px;
+		}
+		
+		#container .column {
+			position: relative;
+			float: left;
+		}
+		
+		#center {
+			padding: 10px 20px;
+			width: 100%;
+		}
+		
+		#left {
+			width: 100px;
+			padding: 0 10px;
+			right: 240px;
+			margin-left: -100%;
+		}
+		
+		#right {
+			width: 100px;
+			padding: 0 10px;
+			margin-right: -100%;
+		}
+		
+		#footer {
+			clear: both;
+		}
+		
+		/* IE hack */
+		* html #left {
+			left: 150px;
+		}
+
+		/* Make the columns the same height as each other */
+		#container {
+			overflow: hidden;
+		}
+
+		#container .column {
+			padding-bottom: 1001em;
+			margin-bottom: -1000em;
+		}
+
+		/* Fix for the footer */
+		* html body {
+			overflow: hidden;
+		}
+		
+		* html #footer-wrapper {
+			float: left;
+			position: relative;
+			width: 100%;
+			padding-bottom: 10010px;
+			margin-bottom: -10000px;
+			background: #fff;
+		}
+
+		/* Aesthetics */
+		body {
+			margin: 0;
+			padding: 0;
+			font-family:Sans-serif;
+			line-height: 1.5em;
+		}
+		
+		p {
+			color: #555;
+		}
+
+		nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		nav ul {
+			color: darkgreen;
+			text-decoration: none;
+		}
+
+		#header {
+			font-size: large;
+			padding: 0.3em;
+			color: #fff;
+			background: #990033;
+		}
+		
+		a {
+			color: #fff;
+			text-decoration:none
+		}
+		
+		#footer {
+			font-size: large;
+			padding: 0.3em;
+			color: #666633;
+			background: #CCCC99;
+		}
+
+		#left {
+			background: #fff;
+		}
+		
+		#right {
+			background: #fff;
+		}
+
+		#center {
+			background: #fff;
+		}
+
+		#container .column {
+			padding-top: 1em;
+		}
+		
+		.chip {
+		  display: inline-block;
+		  padding: 0 25px;
+		  height: 100%;
+		  font-size: 16px;
+		  line-height: 50px;
+		  border-radius: 25px;
+		  background-color: #f1f1f1;
+		}
+
+		.chip input { 
+		  opacity: 0;
+		  width: 0;
+		  height: 0;
+		}
+
+		.chip p {
+		  float: left;
+		  margin: 0 10px 0 -25px;
+		  height: 50px;
+		  width: 50px;
+		  border-radius: 50%;
+		  background-color: wheat;
+		  text-align: center;
+		  font-weight: bold;
+		}
+		
+		.columnmain {
+		  float: left;
+		  width: 50%;
+		}
+		
+		@media screen and (max-width: 1700px) {
+		  .columnmain {
+			width: 100%;
+		  }
+		}
+
+		/* Clear floats after the columns */
+		.row:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+
+		.button {
+		  position: relative;
+		  background-color: #ddd;
+		  border: none;
+		  color: black;
+		  padding: 10px 20px;
+		  text-align: center;
+		  vertical-align: middle;
+		  text-decoration: none;
+		  display: inline-block;
+		  margin: 4px 2px;
+		  cursor: pointer;
+		  border-radius: 16px;
+		  font-size: 16px
+		}	
+		
+		.button:hover {
+		  background-color: wheat;
+		  color: black;
+		}
+		
+		* {box-sizing: border-box}
+		/* Full-width input fields */
+		  input[type=text], input[type=date] {
+		  width: 100%;
+		  padding: 15px;
+		  margin: 5px 0 22px 0;
+		  display: inline-block;
+		  border: none;
+		  background: #f1f1f1;
+		}
+
+		/* Add a background color when the inputs get focus */
+		input[type=text]:focus, input[type=date]:focus {
+		  background-color: #ddd;
+		  outline: none;
+		}
+
+		/* Extra styles for the cancel button */
+		.cancelbtn {
+		  background-color: #f44336;
+		  float: right;
+		  width: 50%;
+		}
+
+		/* Float cancel and signup buttons and add an equal width */
+		.signupbtn {
+		  float: left;
+		  width: 50%;
+		}
+
+		/* Add padding to container elements */
+		.container {
+		  padding: 16px;
+		}
+
+		/* The Modal (background) */
+		.modal {
+		  display: none; /* Hidden by default */
+		  position: fixed; /* Stay in place */
+		  z-index: 1; /* Sit on top */
+		  left: 0;
+		  top: 0;
+		  width: 100%; /* Full width */
+		  height: 100%; /* Full height */
+		  overflow: auto; /* Enable scroll if needed */
+		   background: rgb(71, 78, 93); /* Fallback color */
+			background: rgba(71, 78, 93, 0.5); /* Black background with 0.5 opacity */
+		  padding-top: 50px;
+		}
+
+		/* Modal Content/Box */
+		.modal-content {
+		  background-color: #fefefe;
+		  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+		  border: 1px solid #888;
+		  width: 80%; /* Could be more or less, depending on screen size */
+		}
+
+		/* Style the horizontal ruler */
+		hr {
+		  border: 1px solid #f1f1f1;
+		  margin-bottom: 25px;
+		}
+
+		/* The Close Button (x) */
+		.close {
+		  position: absolute;
+		  right: 35px;
+		  top: 15px;
+		  font-size: 40px;
+		  font-weight: bold;
+		  color: #f1f1f1;
+		}
+
+		.close:hover,
+		.close:focus {
+		  color: #f44336;
+		  cursor: pointer;
+		}
+
+		/* Clear floats */
+		.clearfix::after {
+		  content: "";
+		  clear: both;
+		  display: table;
+		}
+
+		/* Change styles for cancel button and signup button on extra small screens */
+		@media screen and (max-width: 300px) {
+		  .cancelbtn, .signupbtn {
+			width: 100%;
+		  }
+		}
+		
+		
+	</style>
+
+</head>
+<body>
+	<script>	
+		var changeres = 0
+		function chBackcolor(_this, e) {
+			var checkbox = _this.getElementsByTagName("input")[0];
+			if(changeres == 1){
+				if (checkbox.checked == true){
+					_this.style.background = "silver";
+				} else {
+					_this.style.background = "#f1f1f1";
+				}
+				
+			}
+		}
+		function changeresults(_this){
+			if (changeres == 0){
+				changeres = 1;
+				_this.style.background = "wheat";
+				var all = document.getElementsByTagName("input");
+				for (var i=0, max=all.length; i < max; i++) {
+					if(all[i].id == "cb"){
+						all[i].onclick=function() { return true;};
+					}
+				}
+			} else {
+				changeres = 0;
+				_this.style.background = "#ddd";
+				var all = document.getElementsByTagName("input");
+				for (var i=0, max=all.length; i < max; i++) {
+					if(all[i].id == "cb"){
+						all[i].onclick = function() { return false;};
+					}
+				}
+			}
+		}
+		
+	</script>
+
+	<header id="header"><a href="{{ url_for('home')}}"><img style="margin: 0 0 0 25px;" src="/static/rcattlogo.png" alt="rcATT" height="80"/></a>
+	<form action="{{ url_for('retrain')}}" method="POST">
+		<input type="submit" class="button" style="float: right; font-size: 60px; font-weight: bold; padding: 0 15px 5px 15px; margin: -85px 0 0 0;" name="retrain" value="&#9881;" title="Retrain the tool">
+	</form></header>
+
+	<div id="container">
+	<main id="center" class="column">
+	<h4>rcATT is a python tool to predict ATT&amp;CK tactics and techniques from cyber threat reports. Paste your report in the text area so it can be predicted. Tactics and techniques displayed in a darker colored background are predicted as included in the report. The percentage displayed next to the name of the tactic/technique is the likelihood of this tactic/technique of being in the report. If the tactic/technique is indicated as not being in the report, despite the displayed likelihood, it is due to the post-processing in our model. If you disagree with the prediction, you can correct these results and save them to the training set to improve it.</h4>
+	<div class="row">
+		<div class="columnmain">
+		<form action="{{ url_for('predict')}}" method="POST">
+			<input type="submit" class="button" value="Predict">
+			<br/>
+				<!-- <input type="text" name="comment"/> -->
+				<textarea name="message" rows="250" cols="90" required>{% print(report) %}</textarea>
+				<br/>
+
+				<input type="submit" class="button" value="Predict">
+		
+			</form>
+		</div>
+		<form action="{{ url_for('save')}}" method="POST">
+		<div class="columnmain">
+			<button type="button" class="button" onclick="changeresults(this);">Correct the results</button>
+			<input type="submit" class="button" name="trainsave" value="Save the results for training">
+			<button type="button" class="button" onclick="document.getElementById('id01').style.display='block'">Export the results</button>
+			<br/>
+			<textarea name="hidereport" style="display:none;">{% print(report) %}</textarea>
+			<h2><b>Tactics</b></h2>
+			{%for i in range(predictiontact|length)%} 
+				{% if predictiontact[i][2] == 1%}
+					<label class="chip" style="background-color: silver;" onclick="chBackcolor(this);">
+						<input type="checkbox" id="cb" name={{predictiontact[i][0]}} onclick="return false" checked>
+							<p data-color={{predictiontact[i][3]|round(0,'common')}}>{% print(predictiontact[i][3]|round(1, 'common')|int) %}&percnt;</p>
+							{{predictiontact[i][1]}}
+					</label>
+				{% elif predictiontact[i][2] == 0%}
+					<label class="chip" onclick="chBackcolor(this);">
+						<input type="checkbox" id="cb" name={{predictiontact[i][0]}} onclick="return false">
+							<p data-color={{predictiontact[i][3]|round(0,'common')}}>{% print(predictiontact[i][3]|round(1, 'common')|int) %}&percnt;</p>
+							{{predictiontact[i][1]}}
+					</label>
+				{% endif %}
+			{% endfor %}
+			<br/>
+			<h2><b>Techniques</b></h2>
+			{%for i in range(predictiontech|length)%} 
+				{% if predictiontech[i][2] == 1%}
+					<label class="chip" style="background-color: silver;" onclick="chBackcolor(this);">
+						<input type="checkbox" id="cb" name={{predictiontech[i][0]}} onclick="return false" checked>
+							<p data-color={{predictiontech[i][3]|round(0,'common')}}>{% print(predictiontech[i][3]|round(1, 'common')|int) %}&percnt;</p>
+							{{predictiontech[i][1]}}
+					</label>
+				{% elif predictiontech[i][2] == 0%}
+					<label class="chip" onclick="chBackcolor(this);">
+						<input type="checkbox" id="cb" name={{predictiontech[i][0]}} onclick="return false">
+							<p data-color={{predictiontech[i][3]|round(0,'common')}}>{% print(predictiontech[i][3]|round(1, 'common')|int) %}&percnt;</p>
+							{{predictiontech[i][1]}}
+					</label>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<div id="id01" class="modal">
+		  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+		  <div class="modal-content">
+			<div class="container">
+			  <h1>Save the report in STIX</h1>
+			  <hr>
+			  <label><b>Name</b></label>
+			  <input type="text" placeholder="Enter report name" name="name">
+			  
+			  <label><b>Publishing date</b></label>
+			  <input type="date" placeholder="Enter the publishing date of the report" name="date" value="1970-01-01">
+
+			  <!--<label><b>Absolute path to the save the file</b></label>
+			  <input type="text" placeholder="Enter the absolute path" name="path" required>
+			  <input type="file">-->
+				
+			  <div class="row">
+				<div class="columnmain">
+				<button type="button" onclick="document.getElementById('id01').style.display='none'" class="button cancelbtn">Cancel</button>
+				</div>
+				<div class="columnmain">
+				<input type="submit" class="button signupbtn" name="filesave" value="Save">
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		</form>
+	</main>
+	</div>
+	<nav id="left" class="column">
+
+	</nav>
+
+	<div id="right" class="column">
+	</div>
+		
+	<div id="footer-wrapper">
+		<footer id="footer"><h5> Created by Valentine Legoy, as part of her MSc thesis on &ldquo;Retrieving ATT&amp;CK tactics and techniques in cyber threat reports&rdquo;, at the University of Twente and in partnership with Siemens.</h5></footer>
+		<!-- link to github code+link to paper-->
+	</div>
+	<!-- The Modal (contains the saving form) -->
+	<script>
+		var all = document.getElementsByTagName("P");
+		for (var i=0, max=all.length; i < max; i++) {
+			var dc = all[i].dataset.color;
+			if (dc < 25){
+				all[i].style.background = "Cornsilk";
+			} else if (dc<50){
+				all[i].style.background = "Wheat";
+			} else if (dc<75){
+				all[i].style.background = "Burlywood";
+			} else{
+				all[i].style.background = "Peru";
+			}
+		}
+	</script>
+
+</body>
+</html>
