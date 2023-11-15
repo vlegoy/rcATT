@@ -83,13 +83,23 @@ def hanging_node(pred_tactics, predprob_tactics, pred_techniques, predprob_techn
 	Modify prediction of techniques depending on techniques and related tactics confidence score on a
 	threshold basis.
 	"""
-	predprob_techniques_corrected = pred_techniques
-	for i in range(len(pred_techniques)):
-		for j in range(len(pred_techniques[0])):
-			for k in range(len(pred_tactics[0])):
-				if not clt.TACTICS_TECHNIQUES_RELATIONSHIP_DF.loc[clt.TACTICS_TECHNIQUES_RELATIONSHIP_DF[clt.CODE_TACTICS[k]] == clt.CODE_TECHNIQUES[j]].empty:
-					if predprob_techniques[i][j] < c and predprob_techniques[i][j] > 0 and predprob_tactics[i][k] < d:
-						predprob_techniques_corrected[i][k] = 0 
+	predprob_techniques_corrected = np.array(pred_techniques.copy())
+	for i in tqdm.tqdm(range(len(pred_techniques)), total=len(pred_techniques)):
+		for j in range(len(CODE_TACTICS)):
+		    # Get related techniques as a NumPy array
+		    related_techniques_array = TACTICS_TECHNIQUES_RELATIONSHIP_DF[CODE_TACTICS[j]].dropna().values
+		
+		    # Ensure that indices are within the bounds of predprob_techniques
+		    valid_techniques_indices = np.where(np.in1d(CODE_TECHNIQUES, related_techniques_array))[0]
+		
+		    # Check conditions and apply correction
+		    condition_mask = ((c > predprob_techniques[i, valid_techniques_indices]) &
+				      (predprob_techniques[i, valid_techniques_indices] > 0) &
+				      (predprob_tactics[i, j] < d))
+		
+		    # Apply correction to the correct indices
+		    predprob_techniques_corrected[i, valid_techniques_indices[condition_mask]] = 0
+	
 	return predprob_techniques_corrected
 
 def combinations(c, d):
